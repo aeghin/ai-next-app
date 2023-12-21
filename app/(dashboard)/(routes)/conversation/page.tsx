@@ -7,12 +7,23 @@ import * as z from 'zod';
 import { formSchema } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import { useState } from "react";
+import axios from 'axios';
 
 import { Form, FormField, FormItem, FormControl } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
+
 
 const ConversationPage = () => {
+
+    const router = useRouter();
+
+
+    type Message = { role: "user", content: string };
+
+    const [messages, setMessages] = useState<Message[]>([]);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -24,8 +35,28 @@ const ConversationPage = () => {
     const isLoading = form.formState.isSubmitting;
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
-        console.log(values);
-    }
+
+        try {
+            const userMessage: Message = { role: 'user', content: values.prompt };
+
+            const newMessages = [...messages, userMessage];
+
+            const response = await axios.post("/api/conversation", {
+                messages: newMessages,
+            });
+
+            setMessages((currentMsg) => [...currentMsg, userMessage, response.data]);
+
+            form.reset();
+        } catch (error: any) {
+            // TODO: Open Pro modal
+            console.log(error)
+        } finally {
+            router.refresh();
+        };
+    };
+
+
     return (
         <div>
             <Heading
