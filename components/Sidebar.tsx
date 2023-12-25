@@ -62,7 +62,7 @@ const Sidebar = () => {
             <div className="px-3 py2 flex-1">
                 <Link href="/dashboard" className="flex items-center pl-3 mb-14">
                     <div className="relative w-8 h-8 mr-4">
-                        <Image fill alt="logo" src="/logo.png" />
+                        <Image alt="logo" src="/logo.png" fill />
                     </div>
                     <h1 className={cn("text-2xl font-bold", montserrat.className)}>
                         Genius
