@@ -62,8 +62,6 @@ const ConversationPage = () => {
         };
     };
 
-    console.log(messages);
-
     return (
         <div>
             <Heading
