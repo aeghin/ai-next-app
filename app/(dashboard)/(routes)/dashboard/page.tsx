@@ -2,10 +2,10 @@
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { MessageSquare, ArrowRight, Music, Image, Video } from "lucide-react";
+import { MessageSquare, ArrowRight, Music, Image, Video, Code } from "lucide-react";
 import { useRouter } from "next/navigation";
 
-const tools = [
+export const tools = [
     {
         label: 'Conversation',
         icon: MessageSquare,
@@ -36,7 +36,7 @@ const tools = [
     },
     {
         label: 'Code Generation',
-        icon: Video,
+        icon: Code,
         color: 'text-green-700',
         bgColor: 'bg-green-700/10',
         href: '/code'

@@ -21,11 +21,13 @@ import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/User-avatar";
 import { BotAvatar } from "@/components/Bot-avatar";
 
+import { useProModal } from "@/hooks/UseProModal";
+
 
 const ConversationPage = () => {
 
     const router = useRouter();
-
+    const proModal = useProModal();
 
     type Message = { role: "user" | "assistant", content: string };
 
@@ -55,8 +57,11 @@ const ConversationPage = () => {
 
             form.reset();
         } catch (error: any) {
-            // TODO: Open Pro modal
-            console.log(error)
+
+            if (error?.response?.status === 403) {
+                proModal.onOpen();
+            };
+
         } finally {
             router.refresh();
         };
