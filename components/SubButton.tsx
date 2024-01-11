@@ -4,6 +4,7 @@ import { Zap } from "lucide-react";
 import { Button } from "./ui/button";
 import axios from "axios";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 interface SubButtonProps {
     isPro: boolean
@@ -21,7 +22,7 @@ export const SubButton = ({ isPro = false }: SubButtonProps) => {
             window.location.href = response.data.url;
 
         } catch (error) {
-            console.log("billing error", error);
+            toast.error('soemthing went wrong');
         } finally {
             setLoading(false);
         }

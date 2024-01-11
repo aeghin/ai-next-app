@@ -22,6 +22,7 @@ import { UserAvatar } from "@/components/User-avatar";
 import { BotAvatar } from "@/components/Bot-avatar";
 
 import { useProModal } from "@/hooks/UseProModal";
+import toast from "react-hot-toast";
 
 
 const ConversationPage = () => {
@@ -60,6 +61,8 @@ const ConversationPage = () => {
 
             if (error?.response?.status === 403) {
                 proModal.onOpen();
+            } else {
+                toast.error("something went wrong");
             };
 
         } finally {
